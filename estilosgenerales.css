@@ -1,0 +1,254 @@
+*{
+    margin: 0px;
+    padding: 0px; 
+    box-sizing: border-box;
+}
+
+h1, h2, h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 2px;
+}
+
+
+.containerGeneral{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.navContainer{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.nav{
+    width: 700px;
+    height: 2.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin-top: 20px;
+    margin-right: 20px;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 4px;
+}
+
+.item{
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #5e1986;
+    border-radius: 20px;
+    padding-left: 13px;
+    padding-right: 13px;
+    color: white;
+    cursor: pointer;
+}
+
+.itemGeneral{
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.itemPrincipal{
+    width: 350px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin-bottom: 40px;
+    margin-right: 130px;
+    border:1px grey solid;
+    border-radius: 40px;
+    box-shadow: 0px 0px 5px 0px #5e1986;
+}
+
+.titulo{
+    display: none;
+}
+
+.itemPrincipal img{
+    height: 80%;
+    object-fit: cover;
+}
+
+.btnModelo{
+    width: 70%;
+    height: 2.5rem;
+    border-style: none;
+    border: solid 2px black;
+    border-radius: 20px;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:1rem;
+}
+
+.textoItem{
+    width: 500px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    margin-bottom: 40px;
+    margin-left: 135px;
+}
+
+.textoItem p{
+    width: 100%;
+    font-size: 20px;
+    text-align: start;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 4px;
+}
+
+.contador{
+    width: fit-content;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 4px;
+    margin-top: 20px;
+    margin-left: 130px;
+}
+
+#countdown{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.homeCotainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.homeCotainer h1{
+    font-size: 150px;
+}
+
+.homeCotainer img{
+    height: 100%;
+    object-fit: cover;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,.4));
+
+}
+
+@media  (max-width: 1000px) {
+
+    .containerGeneral{
+        height: fit-content;
+        overflow: hidden;
+    }
+
+    .homeCotainer{
+        width: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        overflow: hidden;
+    }   
+
+    .titulo{
+        display: flex;
+        position: absolute;
+        top: 90px;
+        font-size: 45px;  
+        font-family: 'Bebas Neue', sans-serif;
+        letter-spacing: 2px;
+    }
+
+    .homeCotainer h1{
+        font-size: 50px;
+        display: none;
+    }
+
+    .homeCotainer img{
+        height: 70%;
+        position: absolute;
+        bottom: 0px;
+    }
+
+    .nav{
+        display: none;
+    }
+
+    .itemPrincipal{
+        bottom: 0px;
+        right: 0px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        width: 200px;
+        height: 200px;
+        background: white;
+    }
+
+    .btnModelo{
+        width: 80%;
+        height: 1.5rem;
+        border: solid black 1px;
+        text-align: center;
+        font-size: 10px;
+    }
+
+    .textoItem{
+        margin-bottom: 0px;
+        margin-left: 0px;
+        top: 150px;
+        width: 100%;
+        height: fit-content;
+    }
+
+    .textoItem p{
+        width: 90%;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .contador{
+        width: 100%;
+        margin-left: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #countdown{
+        font-size: 17px;
+    }
+    
+}

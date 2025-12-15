@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterego Oficial</title>
+    <link rel="stylesheet" href="estilosgenerales.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+</head>
+
+<body>
+    <div class="containerGeneral">
+        <section class="navContainer">
+            <h5 class="titulo">ALTEREGO OFICIAL</h5>
+            <nav class="nav">
+                <a class="item">Perzonalisados</a>
+                <a class="itemGeneral">Catalogo</a>
+                <a class="itemGeneral">Mayorista</a>
+            </nav>
+            <div class="homeCotainer">
+                <h1 class="animate__animated animate__fadeInTopLeft">Alterego</h1>
+                <img src="assets/Modelo1.png" alt="modelo" title="modelo" class="animate__animated animate__slideInUp" />
+                <h1 class="animate__animated animate__fadeInTopRight">Oficial</h1>
+            </div>
+            <article class="itemPrincipal animate__animated animate__fadeInBottomRight">
+                <img src="assets/remeraPrincipal2.png" alt="Remera" title="Remera Alterego" />
+                <button class="btnModelo">
+                    <a href="#" style="text-decoration: none;">Ver Modelo</a>
+                    <img src="assets/arrow.png" alt="Arrow" title="Arrow" />
+                </button>
+            </article>
+            <article class="textoItem animate__animated animate__fadeInBottomLeft">
+                <p>
+                    <strong>Alter Ego</strong> es una marca de <strong>ropa personalizada</strong> en <strong>Buenos
+                        Aires</strong>.
+                    Creamos prendas y productos <em>a medida</em> con <strong>estampado DTF</strong> sobre
+                    <strong>algodón premium</strong>, combinando <em>calidad</em>, <em>durabilidad</em> y
+                    <em>diseño</em>.
+                    <strong>Tu estilo</strong>, <em>a tu manera</em>.
+                </p>
+            </article>
+            <article class="contador">
+                <p id="countdown"> 🎄 FIN DE OFERTAS 🎅🏻 --:--:--</p>
+            </article>
+
+        </section>
+    </div>
+    <script>
+        function iniciarContador() {
+            const ahora = new Date();
+            const añoActual = ahora.getFullYear();
+
+            const fechaObjetivo = new Date(añoActual, 11, 24, 23, 59, 59);
+
+            function actualizarContador() {
+                const ahora = new Date();
+                const diferencia = fechaObjetivo - ahora;
+
+                if (diferencia <= 0) {
+                    document.getElementById("countdown").textContent =
+                        "Las ofertas navideñas finalizaron 🎄";
+                    return;
+                }
+
+                const horas = Math.floor(diferencia / (1000 * 60 * 60));
+                const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+                const segundos = Math.floor((diferencia / 1000) % 60);
+
+                document.getElementById("countdown").textContent =
+                    `FIN DE OFERTAS: ${String(horas).padStart(2, "0")}:` +
+                    `${String(minutos).padStart(2, "0")}:` +
+                    `${String(segundos).padStart(2, "0")}`;
+            }
+
+            actualizarContador();
+            setInterval(actualizarContador, 1000);
+        }
+
+        iniciarContador();
+    </script>
+
+</body>
+
+</html>
