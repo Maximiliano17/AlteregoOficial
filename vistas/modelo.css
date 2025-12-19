@@ -2,6 +2,8 @@
     margin: 0px;
     padding: 0px; 
     box-sizing: border-box;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
 }
  
 .generalContainer{
@@ -16,7 +18,7 @@
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
@@ -25,10 +27,9 @@
     top: 0px;
     left: 0px;
     margin-top: 40px;
-    margin-left: 120px;
+    margin-left: 400px;
     text-decoration: none;
     color: grey;
-
 }
 
 .nav img{
@@ -36,7 +37,7 @@
 }
 
 .imgModelo{
-    width: 40%;
+    width: 30%;
     height: 85%;
     background: none; 
     display: flex;
@@ -51,6 +52,7 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+
 }
 
 .main-image {
@@ -68,12 +70,12 @@
     align-items: center;
     gap: 2rem;
     position: absolute;
-    bottom: 150px;
+    bottom: 250px;
 }
 
 .thumbnail {
-    width: 200px; 
-    height: 200px;
+    width: 100px; 
+    height: 100px;
     cursor: pointer;
     border: 3px solid transparent;
     border-radius: 10px;
@@ -81,7 +83,6 @@
     transition: border-color 0.2s;
     border: solid 5px white;    
     box-shadow: 0px 0px 5px 0px grey;
-
 }
 
 .thumbnail img {
@@ -100,9 +101,147 @@
 }
 
 .infoModelo{
-    width: 40%;
+    width: 30%;
     height: 85%;
+    display: flex;
+    justify-content: top;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-top: 20px;
+    gap: 1.5rem;
+}
+
+.infoModelo button{
+    border-style: none;
+    border: solid 1px rgb(116, 113, 113);
+    background: white;
+    padding: 7px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.tachado {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: #000;
+  opacity: 0.6;
+}
+
+.price{
+    font-size: 20px;
+    color: green;
+}
+
+.talles{
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items:  center;
+    list-style: none;
+    gap: 2rem;
+}
+
+.talles li{
+    width: 70px;
+    height: 50px;
+    border-radius: 200px;
+    background: black;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+.colores{
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items:  center;
+    list-style: none;
+    gap: 2rem;
+}
+
+
+.blanco{
+    background: white;
+    border: solid 1px grey;
+    color: black;
+    width: 70px;
+    height: 50px;
+    border-radius: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.negro{
+    width: 70px;
+    height: 50px;
+    border-radius: 200px;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+.btnCarrito{
+    width: 100%;
+    height: 3rem;
+    background: black;
+    color: white;
+    border-radius: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+@media  (max-width: 1000px) {
+    .contianer{
+        height: fit-content;
+        flex-direction: column;
+    }
+
+    .imgModelo{
+        width: 100%;
+        height: 70vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .infoModelo{
+        width: 100%;
+        height: fit-content;
+        padding: 10px;
+    }
+
+    .infoModelo h1{
+        width: 100%;
+        text-align: start;
+    }
+
+    .nav{
+        position: relative;
+        margin-top: 20px;
+        margin-left: 0px;
+        padding-left: 20px;
+        text-decoration: none;
+        color: grey;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        width: 100%;
+    }
+
+    .nav img{
+        height: 10px;
+    }
+
 }

@@ -17,6 +17,8 @@ h1, h2, h3 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .navContainer{
@@ -42,6 +44,7 @@ h1, h2, h3 {
     margin-right: 20px;
     font-family: 'Orbitron', sans-serif;
     letter-spacing: 4px;
+    z-index: 1;
 }
 
 .item{
@@ -107,6 +110,8 @@ h1, h2, h3 {
     align-items: center;
     gap:1rem;
     background: white;
+    text-decoration: none;
+    color: black;
 }
 
 .btnModelo a{
@@ -169,15 +174,15 @@ h1, h2, h3 {
 .homeCotainer img{
     height: 100%;
     object-fit: cover;
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,.4));
-
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,.4));
 }
 
 @media  (max-width: 1000px) {
 
     .containerGeneral{
         height: fit-content;
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x: hidden;
     }
 
     .homeCotainer{
