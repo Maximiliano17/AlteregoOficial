@@ -12,6 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
 }
 
 .contianer{
@@ -242,6 +243,29 @@
 
     .nav img{
         height: 10px;
+        padding-right: 10px;
+    }
+
+    .talles{
+        width: 100%;
+        height: 2.5rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items:  center;
+        list-style: none;
+        gap: 1rem;
+    }
+
+    .talles li{
+        width: 70px;
+        height: 50px;
+        border-radius: 200px;
+        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        cursor: pointer;
     }
 
 }

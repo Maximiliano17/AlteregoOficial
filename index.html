@@ -6,21 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alterego Oficial</title>
     <link rel="stylesheet" href="estilosgenerales.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap"
-        rel="stylesheet">
     <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@400;900&family=Playfair+Display:ital,wght@1,500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body>
@@ -28,7 +17,7 @@
         <section class="navContainer">
             <h5 class="titulo">ALTEREGO OFICIAL</h5>
             <nav class="nav">
-                <a class="item">Perzonalisados</a>
+                <a class="item">Personalizados</a>
                 <a class="itemGeneral">Catalogo</a>
                 <a class="itemGeneral">Mayorista</a>
             </nav>
@@ -48,53 +37,149 @@
                 <p>
                     <strong>Alter Ego</strong> es una marca de <strong>ropa personalizada</strong> en <strong>Buenos
                         Aires</strong>.
-                    Creamos prendas y productos <em>a medida</em> con <strong>estampado DTF</strong> sobre
-                    <strong>algodón premium</strong>, combinando <em>calidad</em>, <em>durabilidad</em> y
-                    <em>diseño</em>.
-                    <strong>Tu estilo</strong>, <em>a tu manera</em>.
+                    Creamos prendas y productos <em>a medida</em> con <strong>estampado DTF</strong>.
                 </p>
             </article>
             <article class="contador">
                 <p id="countdown"> 🎄 FIN DE OFERTAS 🎅🏻 --:--:--</p>
             </article>
-
         </section>
-        
+
+        <section class="iaGeneratorSection">
+            <div class="iaMainGrid">
+                <div class="iaCard iaInputs animate__animated animate__fadeInLeft">
+                    <h2 class="iaTitle">GENERAR ESTAMPADO</h2>
+                    <div class="uploadBox" id="dropZone">
+                        <input type="file" id="fileInput" hidden accept="image/*">
+                        <div class="uploadContent" onclick="document.getElementById('fileInput').click()">
+                            <img src="assets/subir.png" id="previewIcon" style="font-size: 3rem; width: 100px; object-fit: cover;" />
+                            <p id="uploadText">SUBE TU IMAGEN</p>
+                        </div>
+                    </div>
+
+                    <div class="inputField">
+                        <label>TEXTO PERSONALIZADO</label>
+                        <textarea id="promptIA"
+                            placeholder="Escribe el texto que quieres ver en la remera..."></textarea>
+                    </div>
+
+                    <div class="inputField">
+                        <label>POSICIÓN DEL TEXTO</label>
+                        <select id="posicionTexto">
+                            <option value="abajo">Debajo de la imagen</option>
+                            <option value="arriba">Arriba de la imagen</option>
+                            <option value="logo-izq">Logo Izquierda (Pecho)</option>
+                            <option value="logo-der">Logo Derecha (Pecho)</option>
+                            <option value="oculto">Sin texto</option>
+                        </select>
+                    </div>
+
+                    <div class="inputField">
+                        <label>COLOR DE PRENDA</label>
+                        <select id="colorRemera">
+                            <option value="negro">Negro</option>
+                            <option value="blanco">Blanco</option>
+                            <option value="rojo">Rojo</option>
+                            <option value="azul">Azul Marino</option>
+                            <option value="celeste">Celeste</option>
+                            <option value="beige">Beige</option>
+                        </select>
+                    </div>
+
+                    <div class="inputField">
+                        <label>UBICACIÓN</label>
+                        <select id="ubicacion">
+                            <option value="FRENTE">FRENTE (Pecho)</option>
+                            <option value="ESPALDA">ESPALDA (Full)</option>
+                            <option value="LOGO_IZQ">LOGO IZQUIERDA</option>
+                            <option value="LOGO_DER">LOGO DERECHA</option>
+                        </select>
+                    </div>
+
+                    <button class="btnPrincipalIA" onclick="generarDiseño()">
+                        VER RESULTADO EN REMERA <span>→</span>
+                    </button>
+                </div>
+
+                <div class="iaVisuals">
+                    <div class="mockupContainer" id="mockupContainer">
+                        <img src="assets/remeraFrente.jpg" id="remeraBase" class="remeraBaseImg">
+
+                        <div id="contEstampado" class="areaEstampado">
+                            <img id="estampadoIA" src="" class="hidden">
+                        </div>
+
+                        <div id="contTexto" class="areaEstampado">
+                            <div id="textoEnRemera" class="textoSuperpuesto"></div>
+                        </div>
+
+                        <div id="loaderGenerando" class="loader-overlay hidden">
+                            <div class="spinner"></div>
+                            <p>PROCESANDO...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
     <script>
-        function iniciarContador() {
-            const ahora = new Date();
-            const añoActual = ahora.getFullYear();
+        function generarDiseño() {
+            const file = document.getElementById('fileInput').files[0];
+            const promptTexto = document.getElementById('promptIA').value;
+            const lado = document.getElementById('ubicacion').value;
+            const posicionT = document.getElementById('posicionTexto').value;
 
-            const fechaObjetivo = new Date(añoActual, 11, 24, 23, 59, 59);
+            const remeraBase = document.getElementById('remeraBase');
+            const estampadoImg = document.getElementById('estampadoIA');
+            const loader = document.getElementById('loaderGenerando');
 
-            function actualizarContador() {
-                const ahora = new Date();
-                const diferencia = fechaObjetivo - ahora;
+            const contEstampado = document.getElementById('contEstampado');
+            const contTexto = document.getElementById('contTexto');
+            const textoRemera = document.getElementById('textoEnRemera');
 
-                if (diferencia <= 0) {
-                    document.getElementById("countdown").textContent =
-                        "Las ofertas navideñas finalizaron 🎄";
-                    return;
-                }
-
-                const horas = Math.floor(diferencia / (1000 * 60 * 60));
-                const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
-                const segundos = Math.floor((diferencia / 1000) % 60);
-
-                document.getElementById("countdown").textContent =
-                    `FIN DE OFERTAS: ${String(horas).padStart(2, "0")}:` +
-                    `${String(minutos).padStart(2, "0")}:` +
-                    `${String(segundos).padStart(2, "0")}`;
+            if (!file) {
+                alert("Primero carga una imagen");
+                return;
             }
 
-            actualizarContador();
-            setInterval(actualizarContador, 1000);
+            loader.classList.remove('hidden');
+
+            remeraBase.src = (lado === "ESPALDA") ? "assets/remeraEspalda.jpg" : "assets/remeraFrente.jpg";
+
+            const clasePosImagen = "pos-" + lado.toLowerCase().replace('_', '-');
+            contEstampado.className = "areaEstampado " + clasePosImagen;
+
+
+            contTexto.className = "areaEstampado";
+            textoRemera.className = "textoSuperpuesto";
+
+            if (posicionT === "arriba" || posicionT === "abajo") {
+
+                contEstampado.appendChild(textoRemera);
+                textoRemera.classList.add(`texto-${posicionT}`);
+            } else if (posicionT !== "oculto") {
+                contTexto.appendChild(textoRemera);
+                contTexto.classList.add(`pos-${posicionT}`);
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                setTimeout(() => {
+                    estampadoImg.src = e.target.result;
+                    estampadoImg.classList.remove('hidden');
+                    textoRemera.innerText = (posicionT === "oculto") ? "" : promptTexto;
+                    loader.classList.add('hidden');
+                }, 600);
+            };
+            reader.readAsDataURL(file);
         }
-
-        iniciarContador();
+        document.getElementById('fileInput').onchange = function (e) {
+            if (e.target.files[0]) {
+                document.getElementById('uploadText').innerHTML = "IMAGEN LISTA ✅";
+            }
+        };
     </script>
-
 </body>
 
 </html>
