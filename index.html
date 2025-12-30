@@ -17,7 +17,7 @@
         <section class="navContainer">
             <h5 class="titulo">ALTEREGO OFICIAL</h5>
             <nav class="nav">
-                <a class="item">Personalizados</a>
+                <a class="item" href="#estampa">Personalizados</a>
                 <a class="itemGeneral">Catalogo</a>
                 <a class="itemGeneral">Mayorista</a>
             </nav>
@@ -41,11 +41,10 @@
                 </p>
             </article>
             <article class="contador">
-                <p id="countdown"> 🎄 FIN DE OFERTAS 🎅🏻 --:--:--</p>
             </article>
         </section>
 
-        <section class="iaGeneratorSection">
+        <section id="estampa" class="iaGeneratorSection">
             <div class="iaMainGrid">
                 <div class="iaCard iaInputs animate__animated animate__fadeInLeft">
                     <h2 class="iaTitle">GENERAR ESTAMPADO</h2>
@@ -60,6 +59,7 @@
                     <div class="inputField">
                         <label>TEXTO PERSONALIZADO</label>
                         <textarea id="promptIA"
+                        style="resize: none;"
                             placeholder="Escribe el texto que quieres ver en la remera..."></textarea>
                     </div>
 
@@ -74,6 +74,7 @@
                         </select>
                     </div>
 
+                    <!--
                     <div class="inputField">
                         <label>COLOR DE PRENDA</label>
                         <select id="colorRemera">
@@ -85,6 +86,7 @@
                             <option value="beige">Beige</option>
                         </select>
                     </div>
+                    -->
 
                     <div class="inputField">
                         <label>UBICACIÓN</label>
@@ -103,7 +105,7 @@
 
                 <div class="iaVisuals">
                     <div class="mockupContainer" id="mockupContainer">
-                        <img src="assets/remeraFrente.jpg" id="remeraBase" class="remeraBaseImg">
+                        <img src="assets/remeraFrente.png" id="remeraBase" class="remeraBaseImg">
 
                         <div id="contEstampado" class="areaEstampado">
                             <img id="estampadoIA" src="" class="hidden">
@@ -145,7 +147,7 @@
 
             loader.classList.remove('hidden');
 
-            remeraBase.src = (lado === "ESPALDA") ? "assets/remeraEspalda.jpg" : "assets/remeraFrente.jpg";
+            remeraBase.src = (lado === "ESPALDA") ? "assets/remeraEspalda.png" : "assets/remeraFrente.png";
 
             const clasePosImagen = "pos-" + lado.toLowerCase().replace('_', '-');
             contEstampado.className = "areaEstampado " + clasePosImagen;

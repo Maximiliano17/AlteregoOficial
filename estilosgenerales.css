@@ -11,6 +11,24 @@ h3 {
     letter-spacing: 2px;
 }
 
+img {
+  pointer-events: none;
+}
+
+#estampa {
+  background-color: #f8f8f8; 
+  padding: 100px 0;          
+  border-top: 1px solid #eaeaea; 
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.iaGeneratorSection {
+  box-shadow: inset 0px 10px 20px -10px rgba(0,0,0,0.05); 
+}
 
 .containerGeneral {
     width: 100%;
