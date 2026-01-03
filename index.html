@@ -40,8 +40,6 @@
                     Creamos prendas y productos <em>a medida</em> con <strong>estampado DTF</strong>.
                 </p>
             </article>
-            <article class="contador">
-            </article>
         </section>
 
         <section id="estampa" class="iaGeneratorSection">
@@ -51,15 +49,15 @@
                     <div class="uploadBox" id="dropZone">
                         <input type="file" id="fileInput" hidden accept="image/*">
                         <div class="uploadContent" onclick="document.getElementById('fileInput').click()">
-                            <img src="assets/subir.png" id="previewIcon" style="font-size: 3rem; width: 100px; object-fit: cover;" />
+                            <img src="assets/subir.png" id="previewIcon"
+                                style="font-size: 3rem; width: 100px; object-fit: cover;" />
                             <p id="uploadText">SUBE TU IMAGEN</p>
                         </div>
                     </div>
 
                     <div class="inputField">
                         <label>TEXTO PERSONALIZADO</label>
-                        <textarea id="promptIA"
-                        style="resize: none;"
+                        <textarea id="promptIA" style="resize: none;"
                             placeholder="Escribe el texto que quieres ver en la remera..."></textarea>
                     </div>
 
@@ -74,7 +72,6 @@
                         </select>
                     </div>
 
-                    <!--
                     <div class="inputField">
                         <label>COLOR DE PRENDA</label>
                         <select id="colorRemera">
@@ -86,7 +83,6 @@
                             <option value="beige">Beige</option>
                         </select>
                     </div>
-                    -->
 
                     <div class="inputField">
                         <label>UBICACIÓN</label>
@@ -123,6 +119,40 @@
                 </div>
             </div>
         </section>
+
+        <div class="containerCatalogo">
+            <article class="articleCatalogo" data-target="modalFire">
+                <img src="catalogos/revista.png" alt="FIRE">
+            </article>
+            <article class="articleCatalogo">
+                <img src="catalogos/revista.png" alt="FIRE">
+            </article>
+            <article class="articleCatalogo">
+                <img src="catalogos/revista.png" alt="FIRE">
+            </article>
+            <article class="articleCatalogo">
+                <img src="catalogos/revista.png" alt="FIRE">
+            </article>
+            <!--
+            <article class="articleCatalogo" data-target="modalIce">
+                <img src="catalogos/revistaICE.png" alt="ICE">
+                <h2>Colección Ice</h2>
+            </article>
+            -->
+        </div>
+        <div id="modalFire" class="modal-overlay">
+            <div class="modal-content">
+                <img src="catalogos/revista.png"/>
+            </div>
+        </div>
+
+        <div id="modalIce" class="modal-overlay">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>Detalles Colección Ice</h2>
+                <p>Contenido específico de la revista Ice...</p>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -178,9 +208,141 @@
         }
         document.getElementById('fileInput').onchange = function (e) {
             if (e.target.files[0]) {
-                document.getElementById('uploadText').innerHTML = "IMAGEN LISTA ✅";
+                document.getElementById('uploadText').innerHTML = "IMAGEN LISTA";
             }
         };
+
+        const articulos = document.querySelectorAll('.articleCatalogo');
+        const botonesCerrar = document.querySelectorAll('.close-btn');
+        const overlays = document.querySelectorAll('.modal-overlay');
+
+        articulos.forEach(articulo => {
+            articulo.addEventListener('click', () => {
+                const modalId = articulo.getAttribute('data-target');
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        botonesCerrar.forEach(boton => {
+            boton.addEventListener('click', () => {
+                const modal = boton.closest('.modal-overlay');
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) {
+                e.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // 1. Definimos las imágenes de cada catálogo
+        const catalogosData = {
+            modalFire: [
+                "catalogos/FIREPortada.png",
+                "img/fire_p2.jpg",
+                "img/fire_p3.jpg",
+                "img/fire_p4.jpg",
+                "img/fire_p5.jpg",
+                "img/fire_p6.jpg"
+            ]
+            // Puedes agregar modalIce, modalEarth, etc.
+        };
+
+        // 2. Estado actual: qué página estamos viendo en cada modal
+        let indicesPagina = {
+            modalFire: 0 // Indica el índice de la imagen de la izquierda
+        };
+
+        // 3. Función para actualizar las imágenes en el DOM
+        function actualizarHojas(modalId) {
+            const paginas = catalogosData[modalId];
+            const indice = indicesPagina[modalId];
+
+            const hojaIzquierda = document.querySelector(`#${modalId} #hojaIzquierda`);
+            const hojaDerecha = document.querySelector(`#${modalId} #hojaDerecha`);
+
+            // Imagen izquierda
+            hojaIzquierda.style.backgroundImage = `url('${paginas[indice]}')`;
+
+            // Imagen derecha (si existe, si no, poner blanco o la misma)
+            if (paginas[indice + 1]) {
+                hojaDerecha.style.backgroundImage = `url('${paginas[indice + 1]}')`;
+            } else {
+                hojaDerecha.style.backgroundImage = "none";
+                hojaDerecha.style.backgroundColor = "white";
+            }
+        }
+
+        // 4. Eventos de clic para pasar páginas
+        document.getElementById('hojaDerecha').addEventListener('click', () => {
+            const modalId = "modalFire"; // O detectarlo dinámicamente
+            if (indicesPagina[modalId] + 2 < catalogosData[modalId].length) {
+                indicesPagina[modalId] += 2;
+                actualizarHojas(modalId);
+            }
+        });
+
+        document.getElementById('hojaIzquierda').addEventListener('click', () => {
+            const modalId = "modalFire";
+            if (indicesPagina[modalId] - 2 >= 0) {
+                indicesPagina[modalId] -= 2;
+                actualizarHojas(modalId);
+            }
+        });
+
+        actualizarHojas("modalFire");
+
+        function cerrarModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function pasarPagina(modalId, direccion) {
+            const paginas = catalogosData[modalId];
+            const actual = indicesPagina[modalId];
+            const contenedor = document.querySelector(`#${modalId} .modal-content`);
+
+            if (direccion === 1 && actual + 2 >= paginas.length) return;
+            if (direccion === -1 && actual - 2 < 0) return;
+
+            const volante = document.createElement('div');
+            volante.className = 'hoja-volante';
+
+            if (direccion === 1) {
+                volante.style.right = "0";
+                volante.style.backgroundImage = `url('${paginas[actual + 1]}')`;
+                volante.style.transformOrigin = "left";
+                contenedor.appendChild(volante);
+
+                setTimeout(() => {
+                    volante.classList.add('flip-to-left');
+                }, 10);
+            } else {
+                volante.style.left = "0";
+                volante.style.backgroundImage = `url('${paginas[actual]}')`;
+                volante.style.transformOrigin = "right";
+                contenedor.appendChild(volante);
+
+                setTimeout(() => {
+                    volante.classList.add('flip-to-right');
+                }, 10);
+            }
+
+            setTimeout(() => {
+                indicesPagina[modalId] += (direccion * 2);
+                actualizarHojas(modalId);
+                volante.remove();
+            }, 600);
+        }
+
+        document.getElementById('hojaDerecha').onclick = () => pasarPagina('modalFire', 1);
+        document.getElementById('hojaIzquierda').onclick = () => pasarPagina('modalFire', -1);
     </script>
 </body>
 
